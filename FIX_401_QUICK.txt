@@ -1,0 +1,140 @@
+═══════════════════════════════════════════════════════════════
+           FIX 401 UNAUTHORIZED - QUICK FIX
+═══════════════════════════════════════════════════════════════
+
+❌ ERROR: 401 Unauthorized when uploading images
+✅ FIX: Add IPFS credentials to Vercel + Redeploy
+
+═══════════════════════════════════════════════════════════════
+STEP 1: Check Vercel Environment Variables (1 minute)
+═══════════════════════════════════════════════════════════════
+
+1. Go to: https://vercel.com/dashboard
+2. Click: crypto-mvp-wine project
+3. Go to: Settings → Environment Variables
+
+Check if you have:
+☐ IPFS_PROJECT_ID
+☐ API_KEY_SECRET
+
+If missing → Add them (Step 2)
+If present → Check values are correct
+
+═══════════════════════════════════════════════════════════════
+STEP 2: Add/Update Variables (2 minutes)
+═══════════════════════════════════════════════════════════════
+
+Add Variable 1:
+  Key: IPFS_PROJECT_ID
+  Value: [your Infura Project ID]
+         Example: 7113b1cacfe24354abf9cee12a242c5e
+  Environment: ✓ All
+
+Add Variable 2:
+  Key: API_KEY_SECRET
+  Value: [your Infura API Secret]
+         Example: 1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t
+  Environment: ✓ All
+
+⚠️ IMPORTANT:
+- No quotes around values
+- No extra spaces
+- Copy exact values from Infura
+
+═══════════════════════════════════════════════════════════════
+STEP 3: REDEPLOY! (2 minutes) ⚠️ CRITICAL!
+═══════════════════════════════════════════════════════════════
+
+⚠️ THIS IS THE MOST IMPORTANT STEP!
+
+After adding variables:
+1. Go to: Deployments tab
+2. Click: ⋯ on latest deployment
+3. Click: Redeploy
+4. Wait: 2-3 minutes
+
+⚠️ Variables only work after redeploy!
+
+═══════════════════════════════════════════════════════════════
+STEP 4: Test API Route (1 minute)
+═══════════════════════════════════════════════════════════════
+
+1. Open: https://crypto-mvp-wine.vercel.app/
+2. Press: F12 (open console)
+3. Type: fetch('/api/secure').then(r => r.json()).then(console.log)
+4. Press: Enter
+
+Expected result:
+✅ { data: "Basic ..." } = Working!
+❌ { data: "" } = Credentials not set
+❌ Error = API route problem
+
+═══════════════════════════════════════════════════════════════
+STEP 5: Test Image Upload (1 minute)
+═══════════════════════════════════════════════════════════════
+
+1. Go to: Create NFT page
+2. Try: Upload an image
+3. Check: Browser console (F12) → Network tab
+4. Look for: IPFS request
+
+Expected:
+✅ 200 OK = Working!
+❌ 401 Unauthorized = Still need to fix
+
+═══════════════════════════════════════════════════════════════
+WHY 401 ERROR HAPPENS
+═══════════════════════════════════════════════════════════════
+
+401 = Authentication failed
+
+Causes:
+1. Credentials not set in Vercel
+2. Wrong values
+3. Didn't redeploy after adding
+
+Fix:
+1. Add credentials
+2. Redeploy
+3. Test
+
+═══════════════════════════════════════════════════════════════
+QUICK CHECKLIST
+═══════════════════════════════════════════════════════════════
+
+☐ IPFS_PROJECT_ID added to Vercel
+☐ API_KEY_SECRET added to Vercel
+☐ Values are correct (no spaces, no quotes)
+☐ REDEPLOYED after adding variables
+☐ Tested /api/secure endpoint
+☐ Tried uploading image
+☐ No more 401 errors
+
+═══════════════════════════════════════════════════════════════
+MOST COMMON MISTAKE
+═══════════════════════════════════════════════════════════════
+
+❌ Added variables but forgot to redeploy!
+
+✅ Solution: Just redeploy and it works!
+
+═══════════════════════════════════════════════════════════════
+EXPECTED RESULT
+═══════════════════════════════════════════════════════════════
+
+Before:
+❌ 401 Unauthorized
+❌ Image upload fails
+
+After:
+✅ 200 OK
+✅ Image uploads successfully
+✅ Image preview appears
+
+═══════════════════════════════════════════════════════════════
+
+Time needed: 5 minutes
+Most important: REDEPLOY after adding variables!
+
+═══════════════════════════════════════════════════════════════
+

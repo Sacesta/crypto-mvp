@@ -1,0 +1,107 @@
+═══════════════════════════════════════════════════════════════
+       🎉 GOOD NEWS: YOU ALREADY HAVE AN API KEY!
+═══════════════════════════════════════════════════════════════
+
+✅ YES, IT'S 100% FREE!
+✅ You already have "My First Key" created!
+✅ You just need to copy the values!
+
+═══════════════════════════════════════════════════════════════
+STEP 1: Get API Key ID (Already Visible!) (30 seconds)
+═══════════════════════════════════════════════════════════════
+
+From your dashboard screenshot:
+
+You can see: "7113b1cacfe24354abf9cee12a242c5e"
+
+This is your API Key ID! ✅
+
+To copy it:
+1. Click "Configure" button next to "My First Key"
+2. Look for "API Key ID" section
+3. You'll see: 7113b1cacfe24354abf9cee12a242c5e
+4. Click the copy icon next to it
+5. SAVE THIS VALUE!
+
+This is your IPFS_PROJECT_ID ✅
+
+═══════════════════════════════════════════════════════════════
+STEP 2: Get API Key Secret (1 minute)
+═══════════════════════════════════════════════════════════════
+
+1. On the API key configuration page
+2. Find "API Key Secret" section
+3. You'll see: "••••••••••••••••" (masked)
+4. Click "Reveal secret" button (eye icon)
+5. The secret will appear
+6. COPY IT IMMEDIATELY! 
+
+⚠️ IMPORTANT: Copy it right away - you might not see it again!
+
+This is your API_KEY_SECRET ✅
+
+═══════════════════════════════════════════════════════════════
+STEP 3: Save Both Values
+═══════════════════════════════════════════════════════════════
+
+Save these in a text file or note:
+
+Value 1: IPFS_PROJECT_ID
+  = 7113b1cacfe24354abf9cee12a242c5e
+  (This is your API Key ID)
+
+Value 2: API_KEY_SECRET
+  = [the revealed secret after clicking "Reveal secret"]
+  (This is your API Key Secret)
+
+═══════════════════════════════════════════════════════════════
+NEXT: Add to Vercel (2 minutes)
+═══════════════════════════════════════════════════════════════
+
+1. Go to: https://vercel.com/dashboard
+2. Click: crypto-mvp-wine project
+3. Go to: Settings → Environment Variables
+4. Click: "Add New"
+
+Add Variable 1:
+  Key: IPFS_PROJECT_ID
+  Value: 7113b1cacfe24354abf9cee12a242c5e
+  Environment: ✓ All
+
+Add Variable 2:
+  Key: API_KEY_SECRET
+  Value: [paste your revealed secret]
+  Environment: ✓ All
+
+5. Click Save
+6. Redeploy
+
+═══════════════════════════════════════════════════════════════
+QUICK SUMMARY
+═══════════════════════════════════════════════════════════════
+
+✅ You already have API key!
+✅ Just need to:
+   1. Copy API Key ID → IPFS_PROJECT_ID
+   2. Reveal and copy secret → API_KEY_SECRET
+   3. Add both to Vercel
+   4. Redeploy
+
+═══════════════════════════════════════════════════════════════
+YES, IT'S 100% FREE!
+═══════════════════════════════════════════════════════════════
+
+✅ No credit card needed
+✅ No payment required
+✅ Free forever
+✅ 3 million requests/month (plenty!)
+
+═══════════════════════════════════════════════════════════════
+
+Time needed: 5 minutes total
+Cost: $0.00 💰
+
+You're almost done! 🚀
+
+═══════════════════════════════════════════════════════════════
+

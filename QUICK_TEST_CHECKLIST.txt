@@ -1,0 +1,145 @@
+═══════════════════════════════════════════════════════════════
+            QUICK TEST CHECKLIST - 5 MINUTES
+═══════════════════════════════════════════════════════════════
+
+Your Site: https://crypto-mvp-wine.vercel.app/
+
+═══════════════════════════════════════════════════════════════
+TEST 1: Does the Site Load? (30 seconds)
+═══════════════════════════════════════════════════════════════
+
+☐ Open: https://crypto-mvp-wine.vercel.app/
+☐ Page loads (not blank white screen)
+☐ You see "CryptoKet" branding/logo
+☐ Navigation menu appears
+☐ Homepage content shows
+
+✅ PASS: Site loads correctly
+❌ FAIL: Check Vercel deployment status
+
+═══════════════════════════════════════════════════════════════
+TEST 2: Check for Errors (1 minute)
+═══════════════════════════════════════════════════════════════
+
+☐ Press F12 to open browser console
+☐ Click "Console" tab
+☐ Look for RED error messages
+
+✅ PASS: No red errors (yellow warnings are OK)
+❌ FAIL: Note the error message
+
+Common Errors:
+- "Failed to fetch" = RPC URL problem
+- "IPFS client not initialized" = Missing IPFS credentials (OK)
+- "Contract not found" = Contract address problem
+
+═══════════════════════════════════════════════════════════════
+TEST 3: Can Wallet Connect? (2 minutes)
+═══════════════════════════════════════════════════════════════
+
+Prerequisites:
+☐ MetaMask extension installed
+☐ MetaMask unlocked
+
+Steps:
+☐ Click "Connect" or "Connect Wallet" button
+☐ MetaMask popup appears
+☐ Click "Next" then "Connect" in MetaMask
+☐ Button changes to show wallet address (like "0x1234...5678")
+
+✅ PASS: Wallet connects successfully
+❌ FAIL: Check MetaMask is installed/unlocked
+
+═══════════════════════════════════════════════════════════════
+TEST 4: Can View Content? (1 minute)
+═══════════════════════════════════════════════════════════════
+
+☐ Homepage shows content
+☐ Navigation links work
+☐ Can click through pages
+☐ No 404 errors
+
+✅ PASS: Navigation works
+❌ FAIL: Check if pages exist
+
+═══════════════════════════════════════════════════════════════
+TEST 5: Can See NFTs? (Optional - 1 minute)
+═══════════════════════════════════════════════════════════════
+
+☐ Look for "Hot Bids" section
+☐ Check for NFT listings
+
+Possible Results:
+- ✅ NFTs appear = Working!
+- ℹ️ "No NFTs for sale" = Normal (no NFTs exist yet)
+- ❌ Error loading = Check RPC URL or contract address
+
+═══════════════════════════════════════════════════════════════
+QUICK RESULTS SUMMARY
+═══════════════════════════════════════════════════════════════
+
+If Tests 1-4 all pass:
+✅ YOUR SITE IS WORKING! 🎉
+
+If any test fails:
+❌ Check the troubleshooting section below
+❌ Note which test failed
+❌ Check browser console for errors
+
+═══════════════════════════════════════════════════════════════
+COMMON ISSUES & FIXES
+═══════════════════════════════════════════════════════════════
+
+Issue: Site won't load
+Fix: Check Vercel deployment is "Ready"
+
+Issue: Wallet won't connect
+Fix: 
+- Install MetaMask: https://metamask.io/download/
+- Unlock MetaMask
+- Check console for errors
+
+Issue: Console shows errors
+Fix:
+- Check environment variables in Vercel
+- Verify RPC URL is correct
+- Check contract address is correct
+
+Issue: Can't fetch NFTs
+Fix:
+- Verify RPC URL matches your network
+- Check contract is deployed to testnet
+- Update contract address in code if needed
+
+═══════════════════════════════════════════════════════════════
+WHAT TO DO AFTER TESTING
+═══════════════════════════════════════════════════════════════
+
+✅ If everything works:
+   - Your site is ready! 🚀
+   - You can share the URL
+   - Test NFT creation (if IPFS configured)
+
+❌ If something doesn't work:
+   1. Note which test failed
+   2. Check browser console (F12)
+   3. See detailed guide: HOW_TO_TEST.md
+   4. Check environment variables in Vercel
+   5. Verify deployment status
+
+═══════════════════════════════════════════════════════════════
+NEXT STEPS
+═══════════════════════════════════════════════════════════════
+
+1. Run through this checklist (5 minutes)
+2. Note any issues
+3. If issues found, check HOW_TO_TEST.md for details
+4. Fix issues and redeploy
+5. Test again
+
+═══════════════════════════════════════════════════════════════
+
+Need more help? See: HOW_TO_TEST.md for detailed testing guide
+
+═══════════════════════════════════════════════════════════════
+

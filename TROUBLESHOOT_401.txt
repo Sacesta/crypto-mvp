@@ -1,0 +1,152 @@
+═══════════════════════════════════════════════════════════════
+        TROUBLESHOOT 401 ERROR - STEP BY STEP
+═══════════════════════════════════════════════════════════════
+
+You're still getting 401 = Authentication is still failing
+
+Let's fix it step by step:
+
+═══════════════════════════════════════════════════════════════
+STEP 1: Verify Environment Variables Are Set (2 min)
+═══════════════════════════════════════════════════════════════
+
+1. Go to: https://vercel.com/dashboard
+2. Click: crypto-mvp-wine project
+3. Go to: Settings → Environment Variables
+
+Check EXACTLY what you see:
+
+Do you see:
+☐ IPFS_PROJECT_ID - with value: 7113b1cacfe24354abf9cee12a242c5e
+☐ API_KEY_SECRET - with value: R/TGYV1Vb1Jw/Vv2BUfrbf2xnbukh8jpUru/xLd6vIILU/HLguGdkQ
+
+If NO → Add them now (see below)
+If YES → Go to Step 2
+
+═══════════════════════════════════════════════════════════════
+STEP 2: Check Values Are EXACT (1 min)
+═══════════════════════════════════════════════════════════════
+
+For IPFS_PROJECT_ID:
+  Should be: 7113b1cacfe24354abf9cee12a242c5e
+  ☐ No extra spaces before/after
+  ☐ No quotes around it
+  ☐ Exact match
+
+For API_KEY_SECRET:
+  Should be: R/TGYV1Vb1Jw/Vv2BUfrbf2xnbukh8jpUru/xLd6vIILU/HLguGdkQ
+  ☐ No extra spaces before/after
+  ☐ No quotes around it
+  ☐ Complete string (not cut off)
+  ☐ Exact match
+
+═══════════════════════════════════════════════════════════════
+STEP 3: TEST API ROUTE (CRITICAL!) (2 min)
+═══════════════════════════════════════════════════════════════
+
+This tells us if credentials are working:
+
+1. Open: https://crypto-mvp-wine.vercel.app/
+2. Press: F12 (open console)
+3. Go to: Console tab
+4. Type this EXACTLY:
+
+   fetch('/api/secure').then(r => r.json()).then(d => console.log('Auth result:', d))
+
+5. Press: Enter
+
+What you should see:
+
+✅ GOOD:
+   { data: "Basic dGVzdDp0ZXN0..." } 
+   (Long string starting with "Basic")
+   = Credentials are working!
+
+❌ BAD:
+   { data: "" }
+   = Credentials NOT set or wrong
+
+❌ ERROR:
+   Failed to fetch
+   = API route problem
+
+═══════════════════════════════════════════════════════════════
+STEP 4: Check Deployment Status (1 min)
+═══════════════════════════════════════════════════════════════
+
+1. Go to: Vercel Dashboard → Deployments
+2. Check: Latest deployment
+   ☐ Status should be "Ready" (green)
+   ☐ Should be recent (after you added variables)
+
+3. If not recent:
+   → Click ⋯ → Redeploy
+   → Wait 2-3 minutes
+
+═══════════════════════════════════════════════════════════════
+STEP 5: Verify Credentials Format (1 min)
+═══════════════════════════════════════════════════════════════
+
+In Vercel Environment Variables:
+
+IPFS_PROJECT_ID should look like:
+  7113b1cacfe24354abf9cee12a242c5e
+  (32 characters, lowercase hex)
+
+API_KEY_SECRET should look like:
+  R/TGYV1Vb1Jw/Vv2BUfrbf2xnbukh8jpUru/xLd6vIILU/HLguGdkQ
+  (Long string with slashes and base64 chars)
+
+⚠️ Common mistakes:
+  ❌ Extra space at start/end
+  ❌ Quotes around value
+  ❌ Missing characters (cut off)
+  ❌ Wrong variable name (typo)
+
+═══════════════════════════════════════════════════════════════
+QUICK FIX CHECKLIST
+═══════════════════════════════════════════════════════════════
+
+☐ Variables added to Vercel?
+☐ Values are exact (no spaces/quotes)?
+☐ Redeployed after adding?
+☐ Tested /api/secure endpoint?
+☐ Endpoint returns "Basic ..." string?
+☐ Latest deployment is recent?
+
+═══════════════════════════════════════════════════════════════
+MOST LIKELY ISSUE
+═══════════════════════════════════════════════════════════════
+
+90% chance it's one of these:
+
+1. ❌ Didn't redeploy after adding variables
+   → Fix: Redeploy now!
+
+2. ❌ Variables have extra spaces
+   → Fix: Delete and re-add with exact values
+
+3. ❌ Variables not set for Production environment
+   → Fix: Make sure "Production" is selected
+
+4. ❌ Wrong values (typo or cut off)
+   → Fix: Copy values again from Infura
+
+═══════════════════════════════════════════════════════════════
+TESTING COMMANDS
+═══════════════════════════════════════════════════════════════
+
+Test 1: Check if credentials are loaded
+  fetch('/api/secure').then(r => r.json()).then(d => 
+    console.log(d.data ? 'CREDENTIALS WORKING' : 'CREDENTIALS MISSING')
+  )
+
+Test 2: See actual auth string
+  fetch('/api/secure').then(r => r.json()).then(console.log)
+
+═══════════════════════════════════════════════════════════════
+
+Run these tests and tell me what you see!
+
+═══════════════════════════════════════════════════════════════
+

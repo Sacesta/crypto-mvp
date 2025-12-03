@@ -11,9 +11,16 @@ const nextConfig = {
     NEXT_PUBLIC_RPC_URL: process.env.NEXT_PUBLIC_RPC_URL,
   },  
   staticPageGenerationTimeout: 1000,
+  output: 'standalone',
   images: {
     unoptimized: true, // Disable image optimization for Vercel compatibility
-    domains: ['gola-nft-marketplace.infura-ipfs.io','gateway.pinata.cloud']
+    domains: ['gola-nft-marketplace.infura-ipfs.io','gateway.pinata.cloud', '93.127.185.55']
+  },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals = [...(config.externals || []), 'sharp', 'canvas'];
+    }
+    return config;
   },
   compiler: {
     styledComponents: true

@@ -1,0 +1,128 @@
+═══════════════════════════════════════════════════════════════
+              FIX IMAGE UPLOAD - QUICK GUIDE
+═══════════════════════════════════════════════════════════════
+
+✅ GOOD: RPC is working!
+❌ PROBLEM: Images not uploading (missing IPFS credentials)
+✅ SOLUTION: Add IPFS credentials to Vercel (10 minutes)
+
+═══════════════════════════════════════════════════════════════
+STEP 1: Get Infura IPFS Credentials (5 minutes)
+═══════════════════════════════════════════════════════════════
+
+1. Go to: https://infura.io/
+2. Sign up (free) or Login
+3. Click: "Create New Key" button
+4. Select: IPFS service
+5. Copy "Project ID" (save it!)
+6. Go to: Settings → API Keys
+7. Copy "API Key Secret" (save it!)
+
+═══════════════════════════════════════════════════════════════
+STEP 2: Add to Vercel (2 minutes)
+═══════════════════════════════════════════════════════════════
+
+1. Go to: https://vercel.com/dashboard
+2. Click: crypto-mvp-wine project
+3. Go to: Settings → Environment Variables
+4. Click: "Add New"
+
+Add Variable 1:
+  Key: IPFS_PROJECT_ID
+  Value: [paste your Infura Project ID]
+  Environment: ✓ Production ✓ Preview ✓ Development
+
+Add Variable 2:
+  Key: API_KEY_SECRET
+  Value: [paste your Infura API Secret]
+  Environment: ✓ Production ✓ Preview ✓ Development
+
+Click: Save for each
+
+═══════════════════════════════════════════════════════════════
+STEP 3: Redeploy (2 minutes)
+═══════════════════════════════════════════════════════════════
+
+1. Go to: Deployments tab
+2. Click: ⋯ on latest deployment
+3. Click: Redeploy
+4. Wait: 2-3 minutes
+
+═══════════════════════════════════════════════════════════════
+STEP 4: Test Upload (1 minute)
+═══════════════════════════════════════════════════════════════
+
+1. Open: https://crypto-mvp-wine.vercel.app/
+2. Go to: Create NFT page
+3. Try: Upload an image (drag & drop or click)
+4. Check: Image preview should appear
+
+✅ If image appears = Working!
+❌ If not = Check console (F12) for errors
+
+═══════════════════════════════════════════════════════════════
+WHY THIS FIXES IT
+═══════════════════════════════════════════════════════════════
+
+Your app needs IPFS to store images.
+IPFS needs credentials (Project ID + Secret).
+Add credentials = Images can upload!
+
+═══════════════════════════════════════════════════════════════
+CHECKLIST
+═══════════════════════════════════════════════════════════════
+
+☐ Create Infura account
+☐ Create IPFS project
+☐ Copy Project ID
+☐ Copy API Secret
+☐ Add IPFS_PROJECT_ID to Vercel
+☐ Add API_KEY_SECRET to Vercel
+☐ Redeploy application
+☐ Test image upload
+
+═══════════════════════════════════════════════════════════════
+EXPECTED RESULT
+═══════════════════════════════════════════════════════════════
+
+Before:
+❌ Images don't upload
+❌ No image preview
+❌ Console shows "IPFS not initialized"
+
+After:
+✅ Images upload successfully
+✅ Image preview appears
+✅ Can create NFTs with images
+
+═══════════════════════════════════════════════════════════════
+TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════
+
+Issue: Still not working after adding credentials
+Fix:
+- Check variables are saved in Vercel
+- Verify values are correct (no spaces)
+- Make sure you redeployed
+- Check browser console (F12) for errors
+
+Issue: Can't find API Secret in Infura
+Fix:
+- Go to Settings → API Keys
+- Click "Reveal" or "View"
+- Copy the secret
+
+═══════════════════════════════════════════════════════════════
+QUICK SUMMARY
+═══════════════════════════════════════════════════════════════
+
+Need: Infura IPFS credentials (Project ID + Secret)
+Time: ~10 minutes
+Steps: Get credentials → Add to Vercel → Redeploy → Test
+
+═══════════════════════════════════════════════════════════════
+
+See FIX_IMAGE_UPLOAD.md for detailed guide
+
+═══════════════════════════════════════════════════════════════
+

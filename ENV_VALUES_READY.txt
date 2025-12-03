@@ -1,0 +1,107 @@
+═══════════════════════════════════════════════════════════════════════
+              ENVIRONMENT VARIABLES - VALUES READY TO USE
+═══════════════════════════════════════════════════════════════════════
+
+Your Site: https://crypto-mvp-wine.vercel.app/
+
+═══════════════════════════════════════════════════════════════════════
+VARIABLE 1: NEXT_PUBLIC_RPC_URL
+═══════════════════════════════════════════════════════════════════════
+
+✅ EASY OPTION (Free - No Signup):
+https://rpc.sepolia.org
+
+✅ OR Use Your Existing Alchemy URL (Found in Your Code):
+https://eth-sepolia.g.alchemy.com/v2/IGJD0yiLouK86_fCJBdm-COk2pKnV2w0
+
+📌 Just copy one of the above and paste!
+
+═══════════════════════════════════════════════════════════════════════
+VARIABLE 2: IPFS_PROJECT_ID
+═══════════════════════════════════════════════════════════════════════
+
+🔗 WHERE TO GET: https://infura.io/
+
+Steps:
+1. Sign up (free) or Login
+2. Click "Create New Key"
+3. Select "IPFS" service
+4. Copy the "Project ID" 
+   (Looks like: 2ABC123XYZ456DEF789GHI012JKL345MNO)
+
+📌 Your actual Project ID will be different - copy from Infura!
+
+═══════════════════════════════════════════════════════════════════════
+VARIABLE 3: API_KEY_SECRET
+═══════════════════════════════════════════════════════════════════════
+
+🔗 WHERE TO GET: Same Infura project
+
+Steps:
+1. In your Infura project dashboard
+2. Go to: Settings → API Keys
+3. Click "Reveal" or "View" next to Secret Key
+4. Copy the entire secret
+   (Looks like: 1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t)
+
+📌 Your actual Secret will be different - copy from Infura!
+
+═══════════════════════════════════════════════════════════════════════
+VARIABLE 4: BASE_URL (Optional)
+═══════════════════════════════════════════════════════════════════════
+
+✅ You already know this:
+https://crypto-mvp-wine.vercel.app
+
+═══════════════════════════════════════════════════════════════════════
+QUICK START (Minimum Required)
+═══════════════════════════════════════════════════════════════════════
+
+Just add these 2 to get started:
+
+1. NEXT_PUBLIC_RPC_URL = https://rpc.sepolia.org
+2. BASE_URL = https://crypto-mvp-wine.vercel.app
+
+(Add IPFS variables later when you create Infura account)
+
+═══════════════════════════════════════════════════════════════════════
+HOW TO ADD TO VERCELL
+═══════════════════════════════════════════════════════════════════════
+
+1. Go to: https://vercel.com/dashboard
+2. Click your project: crypto-mvp-wine
+3. Go to: Settings → Environment Variables
+4. Click: "Add New"
+5. Enter Key and Value
+6. Select: ✓ Production ✓ Preview ✓ Development
+7. Click: Save
+8. Repeat for each variable
+9. Go to: Deployments tab
+10. Click: ⋯ → Redeploy
+
+═══════════════════════════════════════════════════════════════════════
+⚠️ IMPORTANT: Contract Address
+═══════════════════════════════════════════════════════════════════════
+
+Current address: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+(This is localhost only - won't work on live site)
+
+To fix:
+1. Deploy contract to Sepolia testnet:
+   npx hardhat run scripts/deploy.js --network sepolia
+
+2. Copy the new address from output
+
+3. Update context/constants.js:
+   export const MarketAddress = '0xNEW_ADDRESS_HERE';
+
+4. Commit and push to redeploy
+
+═══════════════════════════════════════════════════════════════════════
+
+Need more help? See:
+- HOW_TO_FIND_ENV_VALUES.md (detailed step-by-step)
+- QUICK_FIND_VALUES.md (quick reference)
+
+═══════════════════════════════════════════════════════════════════════
+

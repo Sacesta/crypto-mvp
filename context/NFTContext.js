@@ -54,49 +54,41 @@ export const NFTProvider = ({ children }) => {
   };
 
   const uploadToIPFS = async (file) => {
-    const subdomain = 'https://gola-nft-marketplace.infura-ipfs.io';
+    // Use self-hosted IPFS gateway
+    const gatewayUrl = process.env.NEXT_PUBLIC_IPFS_GATEWAY_URL || 'http://93.127.185.55:8080';
     try {
       // Check if IPFS client is properly initialized
-      if (!client.current || !auth.current) {
-        throw new Error('IPFS client not initialized. Check your IPFS credentials.');
+      if (!client.current) {
+        throw new Error('IPFS client not initialized.');
       }
       
       const added = await client.current.add({ content: file });
 
-      const url = `${subdomain}/ipfs/${added.path}`;
+      const url = `${gatewayUrl}/ipfs/${added.path}`;
 
       return url;
     } catch (error) {
       console.error('Error uploading to file to IPFS. Details: ', error);
-      console.error('Make sure IPFS_PROJECT_ID and API_KEY_SECRET are set in .env file');
       return null;
     }
   };
 
   const fetchAuth = async () => {
-    try {
-      const response = await fetch('/api/secure');
-      if (!response.ok) {
-        throw new Error('Failed to fetch IPFS credentials');
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.warn('IPFS authentication failed. NFT uploads will not work without proper credentials.');
-      console.warn('To enable IPFS uploads, set IPFS_PROJECT_ID and API_KEY_SECRET in .env file');
-      return { data: '' };
-    }
+    // No auth needed for self-hosted IPFS
+    return { data: '' };
   };
 
-  const getClient = (author) => {
+  const getClient = () => {
+    // Use self-hosted IPFS - no auth needed
+    const apiUrl = process.env.NEXT_PUBLIC_IPFS_API_URL || 'http://93.127.185.55:5001';
+    const host = apiUrl.replace('http://', '').replace('https://', '').split(':')[0];
+    const protocol = apiUrl.startsWith('https') ? 'https' : 'http';
+    
     const responseClient = ipfsHttpClient({
-      host: 'ipfs.infura.io',
+      host: host,
       port: 5001,
-      protocol: 'https',
+      protocol: protocol,
       apiPath: '/api/v0',
-      headers: {
-        authorization: author,
-      },
     });
     return responseClient;
   };
@@ -155,21 +147,20 @@ export const NFTProvider = ({ children }) => {
     if (!name || !description || !price || !fileUrl) return;
 
     const data = JSON.stringify({ name, description, image: fileUrl });
-    const subdomain = 'https://gola-nft-marketplace.infura-ipfs.io';
+    const gatewayUrl = process.env.NEXT_PUBLIC_IPFS_GATEWAY_URL || 'http://93.127.185.55:8080';
     try {
       // Check if IPFS client is properly initialized
-      if (!client.current || !auth.current) {
-        throw new Error('IPFS client not initialized. Cannot create NFT metadata.');
+      if (!client.current) {
+        throw new Error('IPFS client not initialized.');
       }
       
       const added = await client.current.add({ content: data });
-      const url = `${subdomain}/ipfs/${added.path}`;
+      const url = `${gatewayUrl}/ipfs/${added.path}`;
       await createSale(url, price, false, null);
       router.push('/');
     } catch (error) {
       console.error('Error uploading to file to IPFS. Details: ', error);
-      console.error('Make sure IPFS_PROJECT_ID and API_KEY_SECRET are set in .env file');
-      alert('Failed to create NFT. Check console for details about IPFS configuration.');
+      alert('Failed to create NFT. Check console for details.');
     }
   };
 
@@ -227,9 +218,9 @@ export const NFTProvider = ({ children }) => {
   useEffect(() => {
     const init = async () => {
       checkIfWalletIsConnected();
-      const { data } = await fetchAuth();
-      auth.current = data;
-      client.current = getClient(auth.current);
+      // No auth needed for self-hosted IPFS
+      auth.current = '';
+      client.current = getClient();
     };
     init();
   }, []);

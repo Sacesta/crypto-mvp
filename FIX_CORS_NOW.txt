@@ -1,0 +1,86 @@
+═══════════════════════════════════════════════════════════════
+              FIX CORS ERROR - QUICK SOLUTION
+═══════════════════════════════════════════════════════════════
+
+❌ PROBLEM: CORS errors from rpc.sepolia.org
+✅ SOLUTION: Use Alchemy RPC instead (5 minutes)
+
+═══════════════════════════════════════════════════════════════
+STEP 1: Update RPC URL in Vercel (2 minutes)
+═══════════════════════════════════════════════════════════════
+
+1. Go to: https://vercel.com/dashboard
+2. Click project: crypto-mvp-wine
+3. Go to: Settings → Environment Variables
+4. Find: NEXT_PUBLIC_RPC_URL
+5. Click: ⋯ (3 dots) → Edit
+
+Change FROM:
+  https://rpc.sepolia.org
+
+Change TO:
+  https://eth-sepolia.g.alchemy.com/v2/IGJD0yiLouK86_fCJBdm-COk2pKnV2w0
+
+6. Click: Save
+
+═══════════════════════════════════════════════════════════════
+STEP 2: Redeploy (2 minutes)
+═══════════════════════════════════════════════════════════════
+
+1. Go to: Deployments tab
+2. Click: ⋯ on latest deployment
+3. Click: Redeploy
+4. Wait: 2-3 minutes for deployment
+
+═══════════════════════════════════════════════════════════════
+STEP 3: Test Again (1 minute)
+═══════════════════════════════════════════════════════════════
+
+1. Open: https://crypto-mvp-wine.vercel.app/
+2. Press: F12 (open console)
+3. Check: Network tab
+   ✅ Should see Alchemy requests
+   ✅ No more CORS errors
+4. Check: Console tab
+   ✅ No red errors
+
+═══════════════════════════════════════════════════════════════
+WHY THIS FIXES IT
+═══════════════════════════════════════════════════════════════
+
+❌ rpc.sepolia.org = Blocks browser (CORS error)
+✅ Alchemy RPC = Allows browser (works!)
+
+You already have Alchemy URL in your code - just use it!
+
+═══════════════════════════════════════════════════════════════
+EXPECTED RESULT
+═══════════════════════════════════════════════════════════════
+
+Before:
+❌ CORS errors in Network tab
+❌ Can't fetch blockchain data
+
+After:
+✅ No CORS errors
+✅ App works correctly
+
+═══════════════════════════════════════════════════════════════
+QUICK CHECKLIST
+═══════════════════════════════════════════════════════════════
+
+☐ Update NEXT_PUBLIC_RPC_URL in Vercel
+☐ Change to Alchemy URL
+☐ Save changes
+☐ Redeploy application
+☐ Wait for deployment
+☐ Test site again
+☐ No more CORS errors!
+
+═══════════════════════════════════════════════════════════════
+
+Time needed: 5 minutes
+Result: CORS errors fixed! ✅
+
+═══════════════════════════════════════════════════════════════
+
