@@ -94,21 +94,42 @@ export const NFTProvider = ({ children }) => {
   };
 
   const createSale = async (url, formInputPrice, isReselling, id) => {
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
+    try {
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
 
-    const price = ethers.utils.parseUnits(formInputPrice, 'ether');
-    const contract = fetchContract(signer);
-    const listingPrice = await contract.getListingPrice();
+      // Check network
+      const network = await provider.getNetwork();
+      console.log('Connected to network:', network.chainId);
+      
+      // Check if contract address is valid (not localhost address)
+      if (MarketAddress === '0x5FbDB2315678afecb367f032d93F642f64180aa3') {
+        throw new Error('Contract not deployed! Please deploy to Sepolia testnet and update the contract address in context/constants.js');
+      }
 
-    const transaction = !isReselling
-      ? await contract.createToken(url, price, { value: listingPrice.toString() })
-      : await contract.resellToken(id, price, { value: listingPrice.toString() });
+      const price = ethers.utils.parseUnits(formInputPrice, 'ether');
+      const contract = fetchContract(signer);
+      
+      console.log('Getting listing price...');
+      const listingPrice = await contract.getListingPrice();
+      console.log('Listing price:', ethers.utils.formatEther(listingPrice), 'ETH');
 
-    setIsLoadingNFT(true);
-    await transaction.wait();
+      setIsLoadingNFT(true);
+      
+      console.log('Sending transaction...');
+      const transaction = !isReselling
+        ? await contract.createToken(url, price, { value: listingPrice.toString() })
+        : await contract.resellToken(id, price, { value: listingPrice.toString() });
+
+      console.log('Transaction sent, waiting for confirmation...', transaction.hash);
+      await transaction.wait();
+      console.log('Transaction confirmed!');
+    } catch (error) {
+      setIsLoadingNFT(false);
+      throw error; // Re-throw to be caught by createNFT
+    }
   };
 
   const fetchNFTs = async () => {
@@ -144,7 +165,10 @@ export const NFTProvider = ({ children }) => {
   const createNFT = async (formInput, fileUrl, router) => {
     const { name, description, price } = formInput;
 
-    if (!name || !description || !price || !fileUrl) return;
+    if (!name || !description || !price || !fileUrl) {
+      alert('Please fill in all fields and upload an image.');
+      return;
+    }
 
     const data = JSON.stringify({ name, description, image: fileUrl });
     const gatewayUrl = process.env.NEXT_PUBLIC_IPFS_GATEWAY_URL || 'http://93.127.185.55:8080';
@@ -154,13 +178,34 @@ export const NFTProvider = ({ children }) => {
         throw new Error('IPFS client not initialized.');
       }
       
+      console.log('Uploading metadata to IPFS...');
       const added = await client.current.add({ content: data });
       const url = `${gatewayUrl}/ipfs/${added.path}`;
+      console.log('Metadata uploaded to IPFS:', url);
+      
+      console.log('Creating NFT on blockchain...');
       await createSale(url, price, false, null);
+      console.log('NFT created successfully!');
       router.push('/');
     } catch (error) {
-      console.error('Error uploading to file to IPFS. Details: ', error);
-      alert('Failed to create NFT. Check console for details.');
+      console.error('Error creating NFT:', error);
+      
+      // Better error messages
+      let errorMessage = 'Failed to create NFT. ';
+      if (error.message) {
+        errorMessage += error.message;
+      } else if (error.reason) {
+        errorMessage += error.reason;
+      } else if (error.code === 4001) {
+        errorMessage = 'Transaction rejected by user.';
+      } else if (error.code === -32603) {
+        errorMessage = 'Transaction failed. Check if you have enough Sepolia ETH for gas and listing fee (0.025 ETH).';
+      } else {
+        errorMessage += 'Check console for details.';
+      }
+      
+      alert(errorMessage);
+      setIsLoadingNFT(false);
     }
   };
 

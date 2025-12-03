@@ -11,6 +11,8 @@ try {
 }
 
 const ALCHEMY_API_KEY_URL = 'https://eth-sepolia.g.alchemy.com/v2/IGJD0yiLouK86_fCJBdm-COk2pKnV2w0';
+const INFURA_API_KEY = 'b810dc227a08412785a0b438668ae6ab';
+const INFURA_SEPOLIA_URL = `https://sepolia.infura.io/v3/${INFURA_API_KEY}`;
 
 module.exports = {
   networks: {
@@ -18,6 +20,10 @@ module.exports = {
       chainId: 1337,
     },
     sepolia: {
+      url: INFURA_SEPOLIA_URL, // Using Infura instead of Alchemy
+      accounts: [privateKey],
+    },
+    sepolia_alchemy: {
       url: ALCHEMY_API_KEY_URL,
       accounts: [privateKey],
     },
