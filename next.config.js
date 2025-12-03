@@ -13,13 +13,24 @@ const nextConfig = {
   staticPageGenerationTimeout: 1000,
   output: 'standalone',
   images: {
-    unoptimized: true, // Disable image optimization for Vercel compatibility
+    unoptimized: true,
+    loader: 'custom',
+    loaderFile: './imageLoader.js',
     domains: ['gola-nft-marketplace.infura-ipfs.io','gateway.pinata.cloud', '93.127.185.55']
   },
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.externals = [...(config.externals || []), 'sharp', 'canvas'];
     }
+    
+    // Completely bypass Next.js image optimization
+    config.module.rules.forEach((rule) => {
+      if (rule.test && rule.test.toString().includes('jpg|jpeg|png|gif|webp|svg')) {
+        rule.type = 'asset/resource';
+        delete rule.use;
+      }
+    });
+    
     return config;
   },
   compiler: {
