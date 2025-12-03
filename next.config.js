@@ -11,11 +11,8 @@ const nextConfig = {
     NEXT_PUBLIC_RPC_URL: process.env.NEXT_PUBLIC_RPC_URL,
   },  
   staticPageGenerationTimeout: 1000,
-  output: 'standalone',
   images: {
     unoptimized: true,
-    loader: 'custom',
-    loaderFile: './imageLoader.js',
     domains: ['gola-nft-marketplace.infura-ipfs.io','gateway.pinata.cloud', '93.127.185.55']
   },
   webpack: (config, { isServer }) => {
